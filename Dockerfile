@@ -1,9 +1,12 @@
 FROM ubuntu:14.04
 MAINTAINER Jordi Prats
 
+ENV EYP_ALLOW 127.0.0.1
 ENV HOME /root
 
 RUN mkdir -p /usr/local/src
+RUN mkdir -p /usr/local/bin
+COPY runme.sh /usr/local/bin/
 
 # timezone and locale
 #
@@ -29,4 +32,4 @@ RUN chmod 777 /var/run/tinyproxy/
 
 EXPOSE 8888
 
-CMD /usr/sbin/tinyproxy -d
+CMD /bin/bash /usr/local/bin/runme.sh
